@@ -14,6 +14,11 @@ import (
 	"github.com/rainycape/unidecode"
 )
 
+const (
+	DefaultLang = "en"
+	DefaultSeparator = "-"
+)
+
 var (
 	// CustomSub stores custom substitution map
 	CustomSub map[string]string
@@ -37,12 +42,12 @@ var (
 // Make returns slug generated from provided string. Will use "en" as language
 // substitution.
 func Make(s string) (slug string) {
-	return MakeLang(s, "en")
+	return MakeLang(s, DefaultLang, DefaultSeparator)
 }
 
 // MakeLang returns slug generated from provided string and will use provided
 // language for chars substitution.
-func MakeLang(s string, lang string) (slug string) {
+func MakeLang(s string, lang string, sep string) (slug string) {
 	slug = strings.TrimSpace(s)
 
 	// Custom substitutions
@@ -76,8 +81,8 @@ func MakeLang(s string, lang string) (slug string) {
 	slug = strings.ToLower(slug)
 
 	// Process all remaining symbols
-	slug = regexpNonAuthorizedChars.ReplaceAllString(slug, "-")
-	slug = regexpMultipleDashes.ReplaceAllString(slug, "-")
+	slug = regexpNonAuthorizedChars.ReplaceAllString(slug, sep)
+	slug = regexpMultipleDashes.ReplaceAllString(slug, sep)
 	slug = strings.Trim(slug, "-")
 
 	if MaxLength > 0 {

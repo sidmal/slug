@@ -1,13 +1,16 @@
 slug
 ====
 
+This is fork of [slug][https://github.com/gosimple/slug] package.
+
+This is fork has had a few improvements from the original slug package such as:
+
+* Added new private constants to setting of default language and word separator of slug 
+* Extended MakeLang function. Now you can set word separator of slug as parameter of function
+* Extended body of Make function for comply new descriptor of MakeLag function
+
 Package `slug` generate slug from unicode string, URL-friendly slugify with
 multiple languages support.
-
-[![GoDoc](https://godoc.org/github.com/gosimple/slug?status.png)](https://godoc.org/github.com/gosimple/slug)
-[![Build Status](https://travis-ci.com/gosimple/slug.svg?branch=master)](https://travis-ci.com/gosimple/slug)
-
-[Documentation online](http://godoc.org/github.com/gosimple/slug)
 
 ## Example
 
@@ -16,43 +19,30 @@ package main
 
 import (
 	"fmt"
-	"github.com/gosimple/slug"
+	"github.com/sidmal/slug"
 )
 
 func main() {
 	text := slug.Make("Hellö Wörld хелло ворлд")
-	fmt.Println(text) // Will print: "hello-world-khello-vorld"
+	fmt.Println(text) // Will print: "hello_world_khello_vorld"
 
-	someText := slug.Make("影師")
-	fmt.Println(someText) // Will print: "ying-shi"
-
-	enText := slug.MakeLang("This & that", "en")
-	fmt.Println(enText) // Will print: "this-and-that"
-
-	deText := slug.MakeLang("Diese & Dass", "de")
-	fmt.Println(deText) // Will print: "diese-und-dass"
+	enText := slug.MakeLang("This & that", "en", "*")
+	fmt.Println(enText) // Will print: "this*and*that"
 
 	slug.CustomSub = map[string]string{
 		"water": "sand",
 	}
 	textSub := slug.Make("water is hot")
-	fmt.Println(textSub) // Will print: "sand-is-hot"
+	fmt.Println(textSub) // Will print: "sand_is_hot"
 }
 
 ```
 
-### Requests or bugs?
-<https://github.com/gosimple/slug/issues>
-
-## Installation
+## How install
 ```sh
-go get -u github.com/gosimple/slug
+go get -u github.com/sidmal/slug
 ```
 
 ## License
 
-The source files are distributed under the
-[Mozilla Public License, version 2.0](http://mozilla.org/MPL/2.0/),
-unless otherwise noted.
-Please read the [FAQ](http://www.mozilla.org/MPL/2.0/FAQ.html)
-if you have further questions regarding the license.
+License of original package you can find by this [link][https://github.com/gosimple/slug/blob/master/LICENSE]

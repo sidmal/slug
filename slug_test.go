@@ -11,6 +11,31 @@ import (
 
 //=============================================================================
 
+func TestSlugSeparator(t *testing.T) {
+	var testCases = []struct {
+		separator string
+		in        string
+		want      string
+	}{
+		{separator: "-", in: "some text", want: "some-text"},
+		{separator: "_", in: "some text", want: "some_text"},
+		{separator: "|", in: "some text", want: "some|text"},
+		{separator: "-", in: "некоторый текст", want: "nekotoryi-tekst"},
+		{separator: "_", in: "некоторый текст", want: "nekotoryi_tekst"},
+		{separator: "|", in: "некоторый текст", want: "nekotoryi|tekst"},
+	}
+
+	for index, st := range testCases {
+		got := MakeLang(st.in, DefaultLang, st.separator)
+
+		if got != st.want {
+			t.Errorf(
+				"%d. Make(%#v) = %#v; want %#v",
+				index, st.in, got, st.want)
+		}
+	}
+}
+
 func TestSlugMake(t *testing.T) {
 	var testCases = []struct {
 		in   string
@@ -90,7 +115,7 @@ func TestSlugMakeLang(t *testing.T) {
 	}
 
 	for index, smlt := range testCases {
-		got := MakeLang(smlt.in, smlt.lang)
+		got := MakeLang(smlt.in, smlt.lang, DefaultSeparator)
 		if got != smlt.want {
 			t.Errorf(
 				"%d. MakeLang(%#v, %#v) = %#v; want %#v",
@@ -114,7 +139,7 @@ func TestSlugMakeUserSubstituteLang(t *testing.T) {
 
 	for index, smust := range testCases {
 		CustomSub = smust.cSub
-		got := MakeLang(smust.in, smust.lang)
+		got := MakeLang(smust.in, smust.lang, DefaultSeparator)
 		if got != smust.want {
 			t.Errorf(
 				"%d. %#v; MakeLang(%#v, %#v) = %#v; want %#v",
