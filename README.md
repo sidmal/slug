@@ -1,7 +1,7 @@
 slug
 ====
 
-This is fork of [slug][https://github.com/gosimple/slug] package.
+This is fork of [slug](https://github.com/gosimple/slug) package.
 
 This is fork has had a few improvements from the original slug package such as:
 
