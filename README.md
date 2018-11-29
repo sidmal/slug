@@ -33,7 +33,7 @@ func main() {
 		"water": "sand",
 	}
 	textSub := slug.Make("water is hot")
-	fmt.Println(textSub) // Will print: "sand_is_hot"
+	fmt.Println(textSub) // Will print: "sand-is-hot"
 }
 
 ```
@@ -45,4 +45,4 @@ go get -u github.com/sidmal/slug
 
 ## License
 
-License of original package you can find by this [link][https://github.com/gosimple/slug/blob/master/LICENSE]
+License of original package you can find by this [link](https://github.com/gosimple/slug/blob/master/LICENSE)
