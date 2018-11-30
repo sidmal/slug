@@ -45,4 +45,4 @@ go get -u github.com/sidmal/slug
 
 ## License
 
-License of original package you can find by this [link](https://github.com/gosimple/slug/blob/master/LICENSE)
+License to original package you can find by this [link](https://github.com/gosimple/slug/blob/master/LICENSE)
